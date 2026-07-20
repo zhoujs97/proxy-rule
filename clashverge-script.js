@@ -83,7 +83,18 @@ function main(config) {
     { name: 'proxy-usa', type: 'socks', port: 7900, proxy: '🇺🇸 美国节点组' },
     { name: 'proxy-jp', type: 'socks', port: 7901, proxy: '🇯🇵 日本节点组' }
   ];
-  config['listeners'] = (config['listeners'] || []).concat(myListeners);
+  
+  // 获取已有的 listeners
+  let currentListeners = config['listeners'] || [];
+  
+  // 提取我们要添加的 listener 的名称
+  const myListenerNames = myListeners.map(l => l.name);
+  
+  // 过滤掉原本配置中已经存在同名的 listener，防止 duplicate name 报错
+  currentListeners = currentListeners.filter(l => !myListenerNames.includes(l.name));
+  
+  // 将过滤后的列表与自定义的列表合并
+  config['listeners'] = currentListeners.concat(myListeners);
 
   // === 5. 引入外部规则集 (Rule Providers) ===
   if (!config['rule-providers']) config['rule-providers'] = {};
