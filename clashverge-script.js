@@ -73,8 +73,11 @@ function main(config) {
     }
   ];
 
-  // 将两层策略组拼接到配置文件中
-  config['proxy-groups'] = appGroups.concat(regionGroups).concat(config['proxy-groups'] || []);
+  // // 将两层策略组拼接到配置文件中
+  // config['proxy-groups'] = appGroups.concat(regionGroups).concat(config['proxy-groups'] || []);
+
+  // 将两层策略组拼接到配置文件中（直接覆盖，抛弃机场自带的策略组）
+  config['proxy-groups'] = appGroups.concat(regionGroups);
 
   // === 4. 插入监听端口 (依然指向地区组，保持底层分流稳定) ===
   const myListeners = [
