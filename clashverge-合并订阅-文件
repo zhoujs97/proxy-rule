@@ -1,0 +1,45 @@
+# 引入机场作为 proxy-providers
+
+# 订阅一
+
+proxy-providers:
+
+airport_1:
+type: http
+url: "https://newsub.tutusub.xyz/subscribe/3885b28f5f29bb7d0c351867ea39c220"
+interval: 86400
+path: ./providers/airport_1.yaml
+health-check:
+enable: true
+interval: 600
+url: http://www.gstatic.com/generate_204
+
+# 订阅二
+
+airport_2:
+type: http
+url: "https://67.230.168.34/x3fSwGNOuZo57YVSbvU9lgmcZ3oHKxKw?token=mxOfsqAaKk5XxH3txo9tpSPfrXkiFcdE&via=clash"
+interval: 86400
+path: ./providers/airport_2.yaml
+health-check:
+enable: true
+interval: 600
+url: http://www.gstatic.com/generate_204
+
+# 在策略组中同时引用这两个机场的节点
+
+proxy-groups:
+- name: 🚀 节点选择
+type: select
+use:
+- airport_1
+- airport_2
+
+- name: 🎯 自动选择
+type: url-test
+url: http://www.gstatic.com/generate_204
+interval: 300
+tolerance: 50
+use:
+- airport_1
+- airport_2
