@@ -1,0 +1,173 @@
+# Shadowrocket: 2026-03-20 22:16:26
+[General]
+# Shadowrocket 快速使用方法：
+# 1、首页 > 添加节点。
+# 2、设置 > 延迟测试方法，选择 CONNECT。
+# 3、首页 > 连通性测试，选择可用节点连接。
+# 首次启动会提示【安装 VPN 配置文件】，请点击【好】和【允许】才能正常使用。
+
+# 添加/更新节点订阅失败时，可尝试以下方法：
+# 1、首页选择一个可用节点，首页 > 全局路由 > 代理，再添加/更新节点订阅。
+# 2、切换网络连接（如关闭 VPN、蜂窝数据改 Wi-Fi、Wi-Fi 改蜂窝数据），再添加/更新节点订阅。
+# 3、检查节点订阅是否错误或失效，重新获取正确有效的订阅地址。
+
+# Shadowrocket 打开 HTTPS 解密方法：
+# 1、点击“配置文件”后面 ⓘ > HTTPS 解密 > 证书 > 生成新的 CA 证书 > 安装证书。
+# 2、系统设置 > 已下载描述文件 > 安装。
+# 3、系统设置 > 通用 > 关于本机 > 证书信任设置 > 开启对应 Shadowrocket 证书信任。
+# “配置文件”是指（配置 > 本地文件）中正在使用的带✔️标记的配置。多设备同步时，如果配置文件已经包含证书密钥内容，建议直接安装现有证书，而不要重新生成新的 CA 证书。
+
+# 旁路系统。如果禁用此选项，可能会导致一些系统问题，如推送通知延迟。
+bypass-system = true
+
+# 跳过代理。此选项强制这些域名或 IP 的连接范围由 Shadowrocket TUN 接口来处理，而不是 Shadowrocket 代理服务器。此选项用于解决一些应用程序的一些兼容性问题。
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com,www.163.com
+
+# TUN 旁路路由。Shadowrocket TUN 接口只能处理 TCP 协议。使用此选项可以绕过指定的 IP 范围，让其他协议通过。
+tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32
+
+# DNS 覆写：使用纯海外加密与公共 DNS，彻底杜绝本地运营商 DNS 泄漏
+dns-server = 1.1.1.1, 8.8.8.8, https://1.1.1.1/dns-query, https://dns.google/dns-query
+
+# 备用 DNS：移除 system，避免回退到本地运营商宽带 DNS 导致泄漏
+fallback-dns-server = 1.0.0.1, 8.8.4.4
+
+# 禁用 IPv6：防止运营商 IPv6 旁路泄漏真实 IP 与 DNS
+ipv6 = false
+
+# 首选 IPv6
+prefer-ipv6 = false
+
+# 直连的域名类规则使用系统 DNS 进行查询。false 表示不启用。
+dns-direct-system = false
+
+# ping 数据包自动回复。
+icmp-auto-reply = true
+
+# 不开启时，「重写的 REJECT 策略」默认只有在配置模式下生效。开启后，可以令该策略在其他全局路由模式下都生效。
+always-reject-url-rewrite = false
+
+# 私有 IP 应答。如果不启用此选项，域名解析返回私有 IP，Shadowrocket 会认为该域名被劫持而强制使用代理。
+private-ip-answer = true
+
+# 直连域名解析失败后使用代理。false 表示不启用。
+dns-direct-fallback-proxy = true
+
+# TUN 包含路由。
+# tun-included-routes =
+
+# 总是真实 IP。
+# always-real-ip =
+
+# DNS 劫持。
+hijack-dns = 8.8.8.8:53,8.8.4.4:53
+
+# 当 UDP 流量匹配到规则里不支持 UDP 转发的节点策略时重新选择回退行为
+udp-policy-not-supported-behaviour = REJECT
+
+# 包含配置。
+# include =
+
+# WebRTC 伪装 IP 保护
+# stun-response-ip =
+# stun-response-ipv6 =
+
+# 网络兼容模式。
+# compatibility-mode =
+
+# 强制所有域名使用本地 DNS 解析。
+# always-ip-address =
+
+# 代理链丢失关闭连接。
+# close-if-proxy-chain-missing =
+
+# 如果设备在网络环境中仅获取到 IPv6 的 DNS
+# ipv6-only-if-no-ipv4-dns =
+
+# QUIC 协议屏蔽策略：对代理连接阻断 QUIC，防止 UDP QoS 丢包导致长连接打字机中断与报错
+block-quic = all-proxy
+
+# 本地 HOST 映射对代理生效。
+# use-local-host-item-for-proxy =
+
+# allow-dns-svcb：允许 DNS SVCB 查询。
+# allow-dns-svcb =
+
+update-url = https://johnshall.github.io/Shadowrocket-ADBlock-Rules-Forever/lazy.conf
+
+[Proxy]
+
+[Proxy Group]
+香港 = select, policy-regex-filter=(香港|HK|HONG KONG|🇭🇰)
+日本 = select, policy-regex-filter=(日本|JP|Japan|JAPAN|🇯🇵)
+美国 = select, policy-regex-filter=(美国|US|USA|America|🇺🇸)
+新加坡 = select, policy-regex-filter=(新加坡|SG|SINGAPORE|Singapore|🇸🇬)
+
+[Rule]
+# AI 节点
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list,美国
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list,日本
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list,新加坡
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Gemini/Gemini.list,美国
+RULE-SET,https://raw.githubusercontent.com/iab0x00/ProxyRules/main/Rule/AI.txt,美国
+
+# 常用海外服务
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list,新加坡
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,美国
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Instagram/Instagram.list,新加坡
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list,新加坡
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list,PROXY
+DOMAIN-SUFFIX,litix.io,PROXY
+DOMAIN-SUFFIX,discomax.com,PROXY
+DOMAIN-SUFFIX,brightline.tv,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/HBO/HBO.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list,PROXY
+
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/PayPal/PayPal.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Amazon/Amazon.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Sony/Sony.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Nintendo/Nintendo.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Epic/Epic.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/SteamCN/SteamCN.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Steam/Steam.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Game/Game.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list,PROXY
+
+# 国内直连服务
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Apple/Apple.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BiliBili/BiliBili.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/NetEaseMusic/NetEaseMusic.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Baidu/Baidu.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouBan/DouBan.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Sina/Sina.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Zhihu/Zhihu.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/XiaoHongShu/XiaoHongShu.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouYin/DouYin.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/TikTok/TikTok.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,PROXY
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT
+
+# 本地局域网地址直连
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list,DIRECT
+
+# CN 地区 IP 直连
+GEOIP,CN,DIRECT
+
+# 最终兜底
+FINAL,PROXY
+
+[Host]
+*.apple.com = server:223.5.5.5
+*.icloud.com = server:223.5.5.5
+localhost = 127.0.0.1
+
+[URL Rewrite]
+^https?://(www.)?g.cn https://www.google.com 302
+^https?://(www.)?google.cn https://www.google.com 302
+
+[MITM]
+hostname = *.google.cn
