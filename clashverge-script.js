@@ -92,7 +92,13 @@ function main(config) {
 
   // === 5. 规则路由 ===
   config['rules'] = [
-    // 国内直连
+    // 国内直连-域名
+    'DOMAIN-SUFFIX,icloud.com,DIRECT',
+    'DOMAIN-SUFFIX,icloud.com.cn,DIRECT',
+    'DOMAIN-SUFFIX,icloud-content.com,DIRECT',
+    'DOMAIN-SUFFIX,apple.com.cn,DIRECT',
+
+    //国内直连-规则集
     'RULE-SET,Apple,DIRECT',
     'RULE-SET,BiliBili,DIRECT',
     'RULE-SET,BiliBiliIntl,DIRECT',
