@@ -60,7 +60,7 @@ function main(config) {
     'YouTube': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml',
     'Instagram': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram.yaml',
     'Spotify': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml',
-    'Netflix': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml',
+    'Netflix': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml',
     'Disney': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml',
     'PayPal': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.yaml',
     'Amazon': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Amazon/Amazon.yaml',
@@ -72,8 +72,8 @@ function main(config) {
     'Game': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.yaml',
     'Microsoft': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml',
     'TikTok': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml',
-    'Global': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml',
-    'Apple': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml',
+    'Global': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical.yaml',
+    'Apple': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml',
     'BiliBili': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml',
     'BiliBiliIntl': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBiliIntl/BiliBiliIntl.yaml',
     'NetEaseMusic': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml',
@@ -81,7 +81,7 @@ function main(config) {
     'DouBan': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouBan/DouBan.yaml',
     'DouYin': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouYin/DouYin.yaml',
     'WeChat': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WeChat/WeChat.yaml',
-    'ChinaMax': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml',
+    'ChinaMax': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml',
   };
 
   for (let name in remoteRules) {
@@ -92,14 +92,15 @@ function main(config) {
 
   // === 5. 规则路由 ===
   config['rules'] = [
-    // 国内直连-域名
+    // Apple直连规则
     'DOMAIN-SUFFIX,icloud.com,DIRECT',
     'DOMAIN-SUFFIX,icloud.com.cn,DIRECT',
     'DOMAIN-SUFFIX,icloud-content.com,DIRECT',
     'DOMAIN-SUFFIX,apple.com.cn,DIRECT',
-
-    //国内直连-规则集
+    'DOMAIN-SUFFIX,me.com,DIRECT',
     'RULE-SET,Apple,DIRECT',
+
+    //国内直连
     'RULE-SET,BiliBili,DIRECT',
     'RULE-SET,BiliBiliIntl,DIRECT',
     'RULE-SET,NetEaseMusic,DIRECT',
