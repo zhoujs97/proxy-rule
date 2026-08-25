@@ -12,6 +12,7 @@ function main(config) {
     '🎬 YouTube',
     '📷 Instagram',
     '📲 Telegram',
+    '🎵 TikTok',
     '🌐 国际通用'
   ];
 
@@ -81,6 +82,8 @@ function main(config) {
     'DouBan': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouBan/DouBan.yaml',
     'DouYin': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouYin/DouYin.yaml',
     'WeChat': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WeChat/WeChat.yaml',
+    'OKX': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OKX/OKX.yaml',
+    'Binance': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Binance/Binance.yaml',
     'ChinaMax': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml',
   };
 
@@ -119,7 +122,15 @@ function main(config) {
     'RULE-SET,YouTube,🎬 YouTube',
     'RULE-SET,Telegram,📲 Telegram',
     'RULE-SET,Instagram,📷 Instagram',
+    'RULE-SET,TikTok,🎵 TikTok',
 
+    // 海外应用直连
+    'RULE-SET,OKX,DIRECT',
+    'RULE-SET,Binance,DIRECT',
+    'DOMAIN-SUFFIX,bybit.com,DIRECT',
+    'DOMAIN-SUFFIX,bytick.com,DIRECT',
+    'DOMAIN-SUFFIX,bybitglobal.com,DIRECT',
+    
     // 通用路由
     'DOMAIN-SUFFIX,litix.io,🌐 国际通用',
     'DOMAIN-SUFFIX,discomax.com,🌐 国际通用',
@@ -137,7 +148,6 @@ function main(config) {
     'RULE-SET,Steam,🌐 国际通用',
     'RULE-SET,Game,🌐 国际通用',
     'RULE-SET,Microsoft,🌐 国际通用',
-    'RULE-SET,TikTok,🌐 国际通用',
     'RULE-SET,Global,🌐 国际通用',
 
     // 兜底规则
