@@ -70,6 +70,7 @@ function main(config) {
     'Nintendo': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.yaml',
     'SteamCN': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml',
     'Steam': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml',
+    'Wise': 'https://raw.githubusercontent.com/Accademia/Additional_Rule_For_Clash/main/VirtualFinance/Wise.yaml',
     'Game': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.yaml',
     'Microsoft': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml',
     'TikTok': 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml',
@@ -130,6 +131,7 @@ function main(config) {
     'DOMAIN-SUFFIX,bybit.com,DIRECT',
     'DOMAIN-SUFFIX,bytick.com,DIRECT',
     'DOMAIN-SUFFIX,bybitglobal.com,DIRECT',
+    'RULE-SET,Wise,DIRECT',
     
     // 通用路由
     'DOMAIN-SUFFIX,litix.io,🌐 国际通用',
