@@ -15,7 +15,21 @@ function main(config) {
     udp: true,
     "dialer-proxy": "✈️ 落地机前置中转"   // 指向下方的中转策略组
   };
+// 🔥 新增：裸 VLESS 落地节点（安全选无，不走 TLS，抗公网扫描）
+  const myCustomVless = {
+    name: "中转落地美国VLESS",
+    type: "vless",
+    server: "23.144.12.123",
+    port: 5328,                                    // 对应 3X-UI 的 ID 5 端口
+    uuid: "be8393ae-7266-42a7-8df7-dd2ed0ac0903",  // 对应 3X-UI 客户端 UUID
+    network: "tcp",
+    tls: false,                                    // 裸 VLESS 必须为 false
+    udp: true,
+    "dialer-proxy": "✈️ 落地机前置中转"              // 同样走前置策略组中转
+  };
 
+  // 注入节点池的最前面
+  config['proxies'].unshift(myCustomVless);
   config['proxies'].unshift(myCustomSocks5);
 
   const allProxyNames = config['proxies'].map(p => p.name);
