@@ -1,45 +1,74 @@
-# 引入机场作为 proxy-providers
+#===================================================================#
+## 🛰️ 我的多机场节点池 + 自建单机节点专属聚合器（主配置容器）
+#===================================================================#
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
 
-# 订阅一
+#===================================================================#
+## 🛠️ 【新增区域】：在这里直接填入你其他直连完好的自建单机节点
+##（注：这里填入的是你直连正常的节点，不需要中转，流量直接去海外）
+#===================================================================#
+proxies:
+  - name: "🇺🇸 我的自建直连单机-美国Reality"
+    type: vless
+    server: 23.144.12.123                # 填写你另一台完好VPS的IP
+    port: 443
+    uuid: db6c1d21-3628-4e2d-902e-4bd8dd78407a
+    tls: true
+    flow: xtls-rprx-vision
+    network: tcp
+    servername: addons.mozilla.org       # 你的Reality伪装域名
+    reality-opts:
+      public-key: WfwZZ9uzr6ECj2UKpx2WMM6Ghk--7aKuBmoFlSCQaQ4
+      short-id: c7
+    client-fingerprint: chrome
 
+  # 💡 如果你还有第2台、第3台直连正常的VPS，直接在下方对齐格式继续往下粘：
+  # - name: "🇯🇵 我的自建直连单机-日本Reality"
+  #   type: vless
+  #   server: 87.65.43.21
+  #   ...
+
+#===================================================================#
+## ✈️ 【机场供应池】：在这里控制机场的引入和弃用
+#===================================================================#
 proxy-providers:
+  # 【机场 1】：兔兔云机场
+  airport_1:
+    type: http
+    url: "https://newsub.tutusub.xyz/subscribe/3885b28f5f29bb7d0c351867ea39c220" 
+    interval: 86400
+    path: ./providers/airport_1.yaml
+    health-check: { enable: true, interval: 600, url: http://gstatic.com }
+      
+  # 【机场 2】：GW 树洞机场
+  # airport_2:
+  #   type: http
+  #   url: "https://67.230.168" 
+  #   interval: 86400
+  #   path: ./providers/airport_2.yaml
+  #   health-check: { enable: true, interval: 600, url: http://gstatic.com }
 
-airport_1:
-type: http
-url: "https://newsub.tutusub.xyz/subscribe/3885b28f5f29bb7d0c351867ea39c220"
-interval: 86400
-path: ./providers/airport_1.yaml
-health-check:
-enable: true
-interval: 600
-url: http://www.gstatic.com/generate_204
+  # 💡 如果以后买了第3个机场，直接在这里把 # 号删掉激活即可：
+  # airport_3:
+  #   type: http
+  #   url: "https://第三个机场的订阅链接"
+  #   interval: 86400
+  #   path: ./providers/airport_3.yaml
+  #   health-check: { enable: true, interval: 600, url: http://gstatic.com }
 
-# 订阅二
-
-airport_2:
-type: http
-url: "https://67.230.168.34/x3fSwGNOuZo57YVSbvU9lgmcZ3oHKxKw?token=mxOfsqAaKk5XxH3txo9tpSPfrXkiFcdE&via=clash"
-interval: 86400
-path: ./providers/airport_2.yaml
-health-check:
-enable: true
-interval: 600
-url: http://www.gstatic.com/generate_204
-
-# 在策略组中同时引用这两个机场的节点
-
+#===================================================================#
+## 🎛️ 底层兜底策略组（无需修改，脚本会自动将其重组覆盖）
+#===================================================================#
 proxy-groups:
-- name: 🚀 节点选择
-type: select
-use:
-- airport_1
-- airport_2
+  - name: PROXY
+    type: select
+    use:
+      - airport_1
+      # - airport_2
+      # - airport_3                      # 激活第3个机场时，记得把这里的 # 删掉
 
-- name: 🎯 自动选择
-type: url-test
-url: http://www.gstatic.com/generate_204
-interval: 300
-tolerance: 50
-use:
-- airport_1
-- airport_2
+rules:
+  - MATCH,PROXY
