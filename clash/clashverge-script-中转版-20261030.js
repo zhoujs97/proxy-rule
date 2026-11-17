@@ -28,7 +28,20 @@ function main(config) {
     "dialer-proxy": "✈️ 落地机前置中转"              // 同样走前置策略组中转
   };
 
+// 🔥 新增：Shadowsocks (SS-2022) 落地节点
+  const myCustomSS = {
+    name: "中转落地美国SS",
+    type: "ss",
+    server: "23.144.12.123",
+    port: 5329,                         // 对应 S-UI 面板的 SS 入站端口
+    cipher: "2022-blake3-aes-128-gcm",  // 若在 S-UI 改成了 aes-128-gcm，此处需同步修改
+    password: "nsz2EULBcn8bDZbXfNCk3A==:Z8iSCT803iMg/KJD/FxfFg==", // 填入 S-UI 面板刷新后的新双段密钥（单段加密则填单段）
+    udp: true,
+    "dialer-proxy": "✈️ 落地机前置中转"   // 走前置策略组中转
+  };
+
   // 注入节点池的最前面
+  config['proxies'].unshift(myCustomSS);
   config['proxies'].unshift(myCustomVless);
   config['proxies'].unshift(myCustomSocks5);
 
