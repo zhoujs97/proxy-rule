@@ -199,7 +199,7 @@ function main(config) {
     'RULE-SET,Netflix,🌐 国际通用',
     'RULE-SET,Disney,🌐 国际通用',
     'RULE-SET,PayPal,🌐 国际通用',
-    'RULE-SET,Amazon,🌐 国际通用',
+    'RULE-SET,Amazon,🇯🇵 日本节点组',
     'RULE-SET,Facebook,🌐 国际通用',
     'RULE-SET,Sony,🌐 国际通用',
     'RULE-SET,Nintendo,🌐 国际通用',
